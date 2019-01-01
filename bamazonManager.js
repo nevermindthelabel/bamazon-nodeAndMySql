@@ -1,22 +1,4 @@
-/*
-List a set of menu options:
-View Products for Sale
-View Low Inventory
-Add to Inventory
-Add New Product
-If a manager selects View Products for Sale,
-the app should list every available item: the
-item IDs, names, prices, and quantities.
-If a manager selects View Low Inventory, then
- it should list all items with an inventory
- count lower than five.
-If a manager selects Add to Inventory, your
-app should display a prompt that will let the
- manager "add more" of any item currently in
-the store. If a manager selects Add New
-Product, it should allow the manager to add a
-completely new product to the store.
-*/
+
 require('dotenv').config();
 const mysql = require('mysql');
 const inquirer = require('inquirer');
@@ -121,8 +103,41 @@ function addToInventory() {
       },
     ]).then((answer) => {
       const managerAddProducts = parseInt(answer.numProductsToAdd);
-      const productIdNum = parseInt(answer.productId)
+      const productIdNum = parseInt(answer.productId);
       connection.query(`UPDATE products SET stock_quantity = stock_quantity + ${managerAddProducts} WHERE item_id = ${productIdNum}`);
       connection.end();
+    });
+}
+
+function addNewProduct() {
+  inquirer
+    .prompt([
+      {
+        name: 'newProduct',
+        type: 'input',
+        message: 'What product would you like to add?',
+      },
+      {
+        name: 'departmentName',
+        type: 'input',
+        message: 'What department does the new product belong to?',
+      },
+      {
+        name: 'newProductPrice',
+        type: 'input',
+        message: 'What is the price for the new item',
+      },
+      {
+        name: 'newProductStock',
+        type: 'input',
+        message: 'What is the number you would like to get for our stock?',
+      },
+    ]).then((answer) => {
+      const newProductName = answer.newProduct;
+      const newProductDepartment = answer.departmentName;
+      const newProductPrice = answer.newProductPrice;
+      const newProductStock = answer.newProductStock;
+      connection.query(`UPDATE products SET product_name = ${newProductName}, department_name = ${newProductDepartment}, price = ${newProductPrice}, stock_quantity = ${newProductStock}
+      `);
     });
 }
