@@ -135,9 +135,15 @@ function addNewProduct() {
     ]).then((answer) => {
       const newProductName = answer.newProduct;
       const newProductDepartment = answer.departmentName;
-      const newProductPrice = answer.newProductPrice;
-      const newProductStock = answer.newProductStock;
-      connection.query(`UPDATE products SET product_name = ${newProductName}, department_name = ${newProductDepartment}, price = ${newProductPrice}, stock_quantity = ${newProductStock}
-      `);
+      const newProductPrice = parseFloat(answer.newProductPrice);
+      const newProductStock = parseInt(answer.newProductStock);
+      connection.query('INSERT INTO products SET ?',
+        {
+          product_name: newProductName,
+          department_name: newProductDepartment,
+          price: newProductPrice,
+          stock_quantity: newProductStock,
+        });
+      connection.end();
     });
 }
