@@ -68,12 +68,13 @@ function start() {
             const cost = parseFloat(response[0].price);
             const arizonaSalesTax = parseFloat(1.086);
             const totalCost = (cost * numUserRequested) * arizonaSalesTax;
+            const salesTotal = numUserRequested * cost;
             if (numInStock < numUserRequested) {
               console.log('Insufficient quantity!');
 
               connection.end();
             } else {
-              connection.query(`UPDATE products SET stock_quantity = stock_quantity - ${numUserRequested} WHERE item_id = ${userInput}`);
+              connection.query(`UPDATE products SET stock_quantity = stock_quantity - ${numUserRequested}, product_sales = ${salesTotal.toFixed(2)} WHERE item_id = ${userInput}`);
               console.log(`Thank you for your purchase. Your total cost is $${totalCost.toFixed(2)}`);
               connection.end();
             }
