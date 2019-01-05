@@ -1,5 +1,5 @@
 INSERT INTO products
-    (product_name, department_name, price, stock_quantity)
+    (product_name, department_name, price, stock_quantity, product_sales)
 
 VALUES
     ('Samsung 55 in 4k TV', 'electronics', 477.99, 5),
@@ -12,3 +12,10 @@ VALUES
     ('Coffee Maker', 'home goods', 53.83, 5),
     ('Peets coffee 20 oz', 'home goods', 12.98, 500),
     ('Razer Blade gaming laptop', 'electronics', 1599.99, 3);
+
+insert into departments
+    (department_name, over_head_costs)
+
+values
+    ('electronics', 1000),
+    ('home goods', 5000);
