@@ -43,9 +43,9 @@ function menuOptions() {
 
 function viewSalesByDepartment() {
   const table = new Table({
-    head: ['department_id',
+    head: ['id',
       'department_name',
-      'over_head_costs',
+      'over_head',
       'product_sales',
       'total_profit'],
     colWidths: [5, 15, 10, 15, 15],
