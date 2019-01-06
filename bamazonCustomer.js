@@ -40,7 +40,7 @@ function start() {
             name: 'productId',
             type: 'input',
             message: 'Enter the id number of the item you\'d like to purchase.',
-            validate(idNumber) {
+            validate(idNumber) { // eslint-disable-next-line
               if (isNaN(idNumber) === false && parseInt(idNumber) <= results.length && parseInt(idNumber) > 0) {
                 return true;
               }
@@ -51,19 +51,19 @@ function start() {
             name: 'numProducts',
             type: 'input',
             message: 'Enter the number of products you\'d like to buy.',
-            validate(idNumber) {
+            validate(idNumber) { // eslint-disable-next-line
               if (isNaN(idNumber) === false && parseInt(idNumber) <= results.length && parseInt(idNumber) > 0) {
                 return true;
               }
               return false;
             },
           },
-        ]).then((answer) => {
+        ]).then((answer) => { // eslint-disable-next-line
           const userInput = parseInt(answer.productId);
           const query = `SELECT * FROM products WHERE item_id = ${userInput}`;
           connection.query(query, (error, response) => {
-            if (error) throw error;
-            const numInStock = parseInt(response[0].stock_quantity);
+            if (error) throw error; // eslint-disable-next-line
+            const numInStock = parseInt(response[0].stock_quantity); // eslint-disable-next-line
             const numUserRequested = parseInt(answer.numProducts);
             const cost = parseFloat(response[0].price);
             const arizonaSalesTax = parseFloat(1.086);
