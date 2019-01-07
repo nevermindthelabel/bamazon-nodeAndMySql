@@ -45,10 +45,10 @@ function viewSalesByDepartment() {
   const table = new Table({
     head: ['id',
       'department_name',
-      'over_head',
+      'over_head_cost',
       'product_sales',
       'total_profit'],
-    colWidths: [5, 15, 10, 15, 15],
+    colWidths: [5, 18, 20, 15, 15],
   });
   connection.query(`SELECT 
   departments.department_id,
@@ -59,22 +59,14 @@ function viewSalesByDepartment() {
     if (error) {
       console.log(error);
     } for (let i = 0; i < results.length; i++) {
-      console.log(results);
-      console.log(`
-      ${results[i].department_id},
-      ${results[i].department_name},
-      ${results[i].over_head_costs},
-      ${results[i].product_sales},
-      ${results[i].total_profit}
-      `);
       const id = results[i].department_id;
       const name = results[i].department_name;
       const cost = results[i].over_head_costs;
       const sales = results[i].product_sales;
       const profit = results[i].total_profit;
       table.push([id, name, cost, sales, profit]);
-      console.log(table.toString());
     }
+    console.log(table.toString());
   });
   connection.end();
 }
