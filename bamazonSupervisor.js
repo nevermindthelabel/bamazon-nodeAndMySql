@@ -50,12 +50,9 @@ function viewSalesByDepartment() {
       'total_profit'],
     colWidths: [5, 18, 20, 15, 15],
   });
-  connection.query(`SELECT 
-  departments.department_id,
-  products.department_name,
-  departments.over_head_costs,
-  products.product_sales, (SUM(product_sales) - SUM(over_head_costs)) AS total_profit
-  FROM departments RIGHT JOIN products ON products.department_name = departments.department_name WHERE product_sales > 0 GROUP BY departments.department_id, departments.department_name`, (error, results) => {
+  connection.query(`SELECT departments.department_id, 
+  departments.department_name, departments.over_head_costs,
+  CASE WHEN SUM(products.product_sales) IS NULL THEN 0 ELSE SUM(products.product_sales) END AS product_sales,SUM(products.product_sales) - departments.over_head_costs AS total_profit FROM products RIGHT JOIN departments ON products.department_name = departments.department_name GROUP BY departments.over_head_costs, departments.department_id, departments.department_name`, (error, results) => {
     if (error) {
       console.log(error);
     } for (let i = 0; i < results.length; i++) {
