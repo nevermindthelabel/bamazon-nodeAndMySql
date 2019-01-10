@@ -5,7 +5,8 @@ module.exports = {
         "no-console": 0,
         "no-use-before-define": 0,
         "no-plusplus": 0,
-        "no-shadow": 0
+        "no-shadow": 0,
+        "radix": 0
     },
     "env": {
 
