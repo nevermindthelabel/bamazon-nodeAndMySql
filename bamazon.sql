@@ -21,9 +21,9 @@ CREATE TABLE products (
 
 CREATE TABLE departments
 (
-  department_id INT PRIMARY KEY NOT NULL
-  AUTO_INCREMENT,
+    department_id INT PRIMARY KEY NOT NULL
+    AUTO_INCREMENT,
     department_name VARCHAR
-  (25) NOT NULL,
-    over_head_costs INT NOT NULL
+    (25) NOT NULL,
+    over_head_costs DECIMAL NOT NULL
 )
